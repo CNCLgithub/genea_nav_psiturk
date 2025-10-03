@@ -1,0 +1,162 @@
+{
+  "practice": [
+    {
+      "trial_id": 1,
+      "trial_video_name": "stim_stone_0.mp4"
+    }
+  ],
+  "stimulus": [
+    {
+      "trial_id": 1,
+      "trial_video_name": "stim_stone_33.mp4"
+    },
+    {
+      "trial_id": 2,
+      "trial_video_name": "stim_stone_18.mp4"
+    },
+    {
+      "trial_id": 3,
+      "trial_video_name": "stim_wood_11.mp4"
+    },
+    {
+      "trial_id": 4,
+      "trial_video_name": "stim_stone_11.mp4"
+    },
+    {
+      "trial_id": 5,
+      "trial_video_name": "stim_stone_9.mp4"
+    },
+    {
+      "trial_id": 6,
+      "trial_video_name": "stim_wood_21.mp4"
+    },
+    {
+      "trial_id": 7,
+      "trial_video_name": "stim_wood_12.mp4"
+    },
+    {
+      "trial_id": 8,
+      "trial_video_name": "stim_stone_41.mp4"
+    },
+    {
+      "trial_id": 9,
+      "trial_video_name": "stim_wood_6.mp4"
+    },
+    {
+      "trial_id": 10,
+      "trial_video_name": "stim_wood_16.mp4"
+    },
+    {
+      "trial_id": 11,
+      "trial_video_name": "stim_stone_44.mp4"
+    },
+    {
+      "trial_id": 12,
+      "trial_video_name": "stim_stone_5.mp4"
+    },
+    {
+      "trial_id": 13,
+      "trial_video_name": "stim_wood_17.mp4"
+    },
+    {
+      "trial_id": 14,
+      "trial_video_name": "stim_stone_22.mp4"
+    },
+    {
+      "trial_id": 15,
+      "trial_video_name": "stim_wood_41.mp4"
+    },
+    {
+      "trial_id": 16,
+      "trial_video_name": "stim_stone_3.mp4"
+    },
+    {
+      "trial_id": 17,
+      "trial_video_name": "stim_stone_46.mp4"
+    },
+    {
+      "trial_id": 18,
+      "trial_video_name": "stim_wood_5.mp4"
+    },
+    {
+      "trial_id": 19,
+      "trial_video_name": "stim_stone_31.mp4"
+    },
+    {
+      "trial_id": 20,
+      "trial_video_name": "stim_stone_26.mp4"
+    },
+    {
+      "trial_id": 21,
+      "trial_video_name": "stim_wood_46.mp4"
+    },
+    {
+      "trial_id": 22,
+      "trial_video_name": "stim_wood_36.mp4"
+    },
+    {
+      "trial_id": 23,
+      "trial_video_name": "stim_stone_6.mp4"
+    },
+    {
+      "trial_id": 24,
+      "trial_video_name": "stim_wood_31.mp4"
+    },
+    {
+      "trial_id": 25,
+      "trial_video_name": "stim_wood_7.mp4"
+    },
+    {
+      "trial_id": 26,
+      "trial_video_name": "stim_stone_16.mp4"
+    },
+    {
+      "trial_id": 27,
+      "trial_video_name": "stim_wood_26.mp4"
+    },
+    {
+      "trial_id": 28,
+      "trial_video_name": "stim_wood_24.mp4"
+    },
+    {
+      "trial_id": 29,
+      "trial_video_name": "stim_stone_38.mp4"
+    },
+    {
+      "trial_id": 30,
+      "trial_video_name": "stim_wood_28.mp4"
+    },
+    {
+      "trial_id": 31,
+      "trial_video_name": "stim_wood_2.mp4"
+    },
+    {
+      "trial_id": 32,
+      "trial_video_name": "stim_stone_14.mp4"
+    },
+    {
+      "trial_id": 33,
+      "trial_video_name": "stim_wood_33.mp4"
+    },
+    {
+      "trial_id": 34,
+      "trial_video_name": "stim_stone_29.mp4"
+    },
+    {
+      "trial_id": 35,
+      "trial_video_name": "stim_wood_44.mp4"
+    },
+    {
+      "trial_id": 36,
+      "trial_video_name": "stim_stone_36.mp4"
+    },
+    {
+      "trial_id": 37,
+      "trial_video_name": "stim_wood_39.mp4"
+    },
+    {
+      "trial_id": 38,
+      "trial_video_name": "stim_stone_21.mp4"
+    }
+  ]
+}
