@@ -30,9 +30,7 @@ custom_code = Blueprint('custom_code', __name__, template_folder='templates', st
 def run_stimulus():
     current_app.logger.info("Running condition file generator...")
     try:
-        print("BLAH")
         stimulus.main()
-        print("BOOYA")
         return jsonify(success=True)
     except TemplateNotFound:
         abort(404)
