@@ -37,7 +37,6 @@ if [[ "$@" =~ "data" ]] || [[ "$@" =~ "all" ]];then
     wget "https://yaleedu-my.sharepoint.com/:u:/g/personal/aalap_shah_yale_edu/EXNoP4NxxsBKvtbfYteBH2MBeAoE5UyOQUP1J5Hn1Un-hg?e=wiV5OL&download=1" -O "stimuli_videos.zip"
     chmod +777 stimuli_videos.zip
     unzip stimuli_videos.zip
-    mkdir psiturk/static/stimuli_videos
     mv stimuli_videos/* psiturk/static/stimuli_videos/
     rm -rf stimuli_videos
     rm -rf stimuli_videos.zip
