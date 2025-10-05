@@ -34,7 +34,7 @@ fi
 # download stimulus set
 if [[ "$@" =~ "data" ]] || [[ "$@" =~ "all" ]];then
     echo "Pulling data..."
-    wget "https://yaleedu-my.sharepoint.com/:u:/g/personal/aalap_shah_yale_edu/EXNoP4NxxsBKvtbfYteBH2MBeAoE5UyOQUP1J5Hn1Un-hg?e=wiV5OL" -O "stimuli_videos.zip"
+    wget "https://yaleedu-my.sharepoint.com/:u:/g/personal/aalap_shah_yale_edu/EXNoP4NxxsBKvtbfYteBH2MBeAoE5UyOQUP1J5Hn1Un-hg?e=wiV5OL&download=1" -O "stimuli_videos.zip"
     chmod +777 stimuli_videos.zip
     unzip stimuli_videos.zip
     mkdir psiturk/static/stimuli_videos
