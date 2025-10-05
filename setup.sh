@@ -19,26 +19,28 @@ fi
 CONT_NAME="psiturk.sif"
 
 # container setup
-if [[ "$@" =~ "cont_pull" ]] || [[ "$@" =~ "all" ]];then
-    echo "Pulling singularity container..."
-    wget "https://yale.box.com/shared/static/6eej5c1p0clkts5xj0339tqkzhmsw5l2.sif" -O "$CONT_NAME"
-elif [[ "$@" =~ "cont_build" ]];then
-    echo "Building singularity container..."
-    SINGULARITY_TMPDIR=/var/tmp sudo -E singularity build "$CONT_NAME" Singularity
+if [[ "$1" =~ "cont_pull" ]] || [[ "$1" =~ "all" ]];then
+    echo_blue "Pulling singularity container..."
+    wget --no-check-certificate "https://yaleedu-my.sharepoint.com/:u:/g/personal/aalap_shah_yale_edu/ETzZVxrXDUdIowJYnXZ2FrEBos3uQJ5xIsJByNvt5FW2tQ?e=M1vhRu&download=1" -O "$CONT_NAME"
+elif [[ "$1" =~ "cont_build" ]];then
+    echo_blue "Building apptainer container..."
+    remove "${ENV[cont_main]}"
+    sudo -E apptainer build "${ENV[cont_main]}" "${ENV[cont_def]}"
 else
-    echo "Not touching container"
+    echo_green "Not touching container"
 fi
 
 
 # download stimulus set
 if [[ "$@" =~ "data" ]] || [[ "$@" =~ "all" ]];then
     echo "Pulling data..."
-    wget "https://yale.box.com/shared/static/42aaq1pw4lwsgg7x4gt9jpqkd48sj1a7.zip" -O "images.zip"
-    chmod +777 images.zip
-    unzip images.zip
-    mv images/* psiturk/static/images/
-    rm -rf images
-    rm -rf images.zip
+    wget "https://yaleedu-my.sharepoint.com/:u:/g/personal/aalap_shah_yale_edu/EXNoP4NxxsBKvtbfYteBH2MBeAoE5UyOQUP1J5Hn1Un-hg?e=wiV5OL" -O "stimuli_videos.zip"
+    chmod +777 stimuli_videos.zip
+    unzip stimuli_videos.zip
+    mkdir psiturk/static/stimuli_videos
+    mv stimuli_videos/* psiturk/static/stimuli_videos/
+    rm -rf stimuli_videos
+    rm -rf stimuli_videos.zip
 else
     echo "Not pulling any data"
 fi
