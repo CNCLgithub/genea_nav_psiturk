@@ -2,8 +2,8 @@ let PROLIFIC_ID = "";
 
 let START_INSTRUCTION = 0;
 
-let SKIP_PROLIFIC = true;
-let SKIP_INSTRUCTIONS = true;
+let SKIP_PROLIFIC = false;
+let SKIP_INSTRUCTIONS = false;
 
 let psiTurk = new PsiTurk(uniqueId, adServerLoc, mode);
 
@@ -172,6 +172,7 @@ let Experiment = function (condition_list, is_practice) {
                 "The upcoming trials might not seem as easy as these practice trials. " +
                 "That is completely okay and expected!<br>" +
                 "If you feel unsure, just go with your intuition and please try to do your best." +
+                "<br><br><b> Remember, you can always click on the video to play it again.<b><br>" +
                 "<br><br>Press <b>CONTINUE</b> to start the experiment!",
                 Page.StatusSuccess,
                 function () {

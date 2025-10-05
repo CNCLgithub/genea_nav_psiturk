@@ -28,21 +28,27 @@ let init_instructions = [
         "center"
     ],
     [
-        "In each trial of this experiment, you will be shown a video depicting an obstacle course. " +
-        "In the video, you will see an agent standing on a \'start\' (left-most) platform and a number of other platforms in front of the agent.<br><br>" +
-        "<b>Your task here will be to use the slider provided below to report how difficult it would be for the agent to go from the \'start\' (left-most) platform to the \'final\' (right-most) platform.</b><br>" +
-        "<br><b>NOTES: </b><br>" +
-        "Although this is a video rendered in a graphical software, <b>please assume that all the rules of physics from the real world apply</b> " +
-        "-- e.g., each platform has some mass (depending on the material with which they were built) or that gravity acts in the downward direction. " +
+        "In each trial of this experiment, you will be shown a video of an obstacle course composed of platforms that vary in their shape and material composition. " +
+        "The video will also show an agent standing on the \'start\' (left-most) platform and a number of other platforms in front of the agent.<br><br>" +
+        "<b>Your task is to use the slider provided below to report how difficult it would be for the agent to go from the \'start\' (left-most) platform to the \'final\' (right-most) platform.</b><br>" +
+        "<br><b>NOTE: </b><br>" +
+        "Although you will be shown videos rendered in a graphical software, <b>please assume that all the rules of physics from the real world apply</b> " +
+        "-- for instance, each platform has mass depending on the material with which it is built, or that gravity acts in the downward direction. " +
         "<br>", "left"
     ],
     [
-        "Below is an example video showing three platforms: the \'start\' platform on the left made of stone (on which the agent is standing), a wooden platform in the middle, and the \'final\' platform to the right also made of stone.<br><br>" +
-        "<b>NOTE:</b> In each trial of the experiment you will see similar videos but the number, shape and material of the platforms will vary. Please report your difficulty judgment accordingly.<br><br>",
-        "center", "../static/stimuli_videos/stim_wood_0.mp4"
+        "Below is an example video showing three platforms: " +
+        "<ul>" +
+        "<li>The \'start\' platform on the left made of stone (on which the agent is standing)" +
+        "<li>A wooden platform in the middle" +
+        "<li>The \'final\' platform on the right, also made of stone<br><br>" +
+        "</ul><br>" +
+        "<b>NOTE:</b><br> In each trial of the experiment you will see similar videos but the number, shape and material of the platforms will vary. Please report your difficulty judgment accordingly.<br><br>",
+        "left", "../static/stimuli_videos/stim_wood_0.mp4"
     ],
     [
         "Let's do a small practice run to get you acquainted to the task! <br><br>" +
+        "<b>NOTE:</b> You can click on the video to play it again.<br><br>" +
         "Click <b>NEXT</b> once you are ready.",
         "center"
     ],
