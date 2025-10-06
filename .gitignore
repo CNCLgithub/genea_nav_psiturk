@@ -58,4 +58,5 @@ venv/
 psiturk/.psiturk_history
 psiturk/static/images
 psiturk/static/stimuli_videos
-analysis/participants.db
+data/
+out/

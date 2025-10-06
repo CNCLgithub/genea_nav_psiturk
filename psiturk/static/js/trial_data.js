@@ -1,11 +1,10 @@
 class StimulusData {
-    constructor(trial_num, trial_id, trial_video_filename, trial_image_filename) {
+    constructor(trial_num, trial_id, trial_video_filename) {
 
         this.trial_num = trial_num;
 
         this.trial_id = trial_id;
         this.trial_video_filename = trial_video_filename;
-        this.trial_image_filename = trial_image_filename;
     }
 
     get_trial_number(){
@@ -22,10 +21,6 @@ class StimulusData {
 
     get_trial_video_filename() {
         return this.trial_video_filename;
-    }
-
-    get_trial_image_filename() {
-        return this.trial_image_filename;
     }
 }
 
