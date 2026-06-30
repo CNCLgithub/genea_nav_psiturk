@@ -75,6 +75,8 @@ class UserKeyPress {
 
 class Utils {
     static goFullscreen(element) {
+        element.style.overflow = "auto";
+
         if (element.requestFullscreen)
             element.requestFullscreen();
         else if (element.mozRequestFullScreen)

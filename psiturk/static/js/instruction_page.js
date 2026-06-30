@@ -43,11 +43,11 @@ let init_instructions = [
         "<li>A wooden platform in the middle" +
         "<li>The \'final\' platform on the right, also made of stone<br><br>" +
         "</ul><br>" +
-        "<b>NOTE:</b><br> In each trial of the experiment you will see similar videos but the number, shape and material of the platforms will vary. Please report your difficulty judgment accordingly.<br><br>",
-        "left", "../static/stimuli_videos/stim_wood_0.mp4"
+        "<b>NOTE:</b><br> In each trial of the experiment you will see similar videos, but the number, shape and material of the platforms will vary. Please report your difficulty judgment accordingly.<br><br>",
+        "left", "../static/stimuli_videos/diff_0_1.mp4"
     ],
     [
-        "Let's do a small practice run to get you acquainted to the task! <br><br>" +
+        "Let's do one practice trial to get you acquainted to the task! <br><br>" +
         "<b>NOTE:</b> You can click on the video to play it again.<br><br>" +
         "Click <b>NEXT</b> once you are ready.",
         "center"

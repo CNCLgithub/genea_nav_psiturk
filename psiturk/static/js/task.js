@@ -2,7 +2,7 @@ let PROLIFIC_ID = "";
 
 let START_INSTRUCTION = 0;
 
-let SKIP_PROLIFIC = false;
+let SKIP_PROLIFIC = true;
 let SKIP_INSTRUCTIONS = false;
 
 let psiTurk = new PsiTurk(uniqueId, adServerLoc, mode);

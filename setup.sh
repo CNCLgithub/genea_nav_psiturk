@@ -16,6 +16,13 @@ if [[ $# -eq 0 ]] || [[ "$@" =~ "--help" ]] || [[ "$@" =~ "-h" ]];then
     exit 0
 fi
 
+echo_green () { echo -e "\033[1;38;5;047m$* \033[0m"; }
+echo_blue () { echo -e "\033[1;38;5;051m$* \033[0m"; }
+echo_orange () { echo -e "\033[1;38;5;202m$* \033[0m"; }
+echo_red () { echo -e "\033[1;38;5;196m$* \033[0m"; }
+echo_yellow () { echo -e "\033[1;38;5;226m$* \033[0m"; }
+echo_purple () { echo -e "\033[1;38;5;141m$* \033[0m"; }
+
 CONT_NAME="psiturk.sif"
 
 # container setup

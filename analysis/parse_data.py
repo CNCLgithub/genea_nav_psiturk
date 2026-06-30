@@ -4,7 +4,7 @@ import csv
 
 from scipy import stats
 
-from sqlalchemy import create_engine, MetaData, Table
+from sqlalchemy import create_engine, MetaData, Table, select
 
 
 DATA_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), "data")
@@ -283,21 +283,23 @@ class Experiment:
 
 def parse_db(db_path):
     metadata = MetaData()
-    metadata.bind = create_engine("sqlite:///" + db_path)
+    engine = create_engine("sqlite:///" + db_path)
 
-    table = Table("genea_nav", metadata, autoload=True)
-    s = table.select()
-    rows = s.execute()
+    table = Table("genea_nav", metadata, autoload_with=engine)
+    s = select(table)
 
     excluded_subjects = []
 
     data = []
     psiturk_statuses = [3, 4, 5, 7]  # status codes for successful completion etc.
-    for row in rows:
-        if row['status'] in psiturk_statuses and row['uniqueid'] not in excluded_subjects:
-            data.append(row['datastring'])
-        else:
-            print("Excluding subject with ID: " + str(row['uniqueid']) + " with status: " + str(row['status']))
+
+    with engine.connect() as connection:
+        rows = connection.execute(s)
+        for row in rows:
+            if row.status in psiturk_statuses and row.uniqueid not in excluded_subjects:
+                data.append(row.datastring)
+            else:
+                print("Excluding subject with ID: " + str(row.uniqueid))
 
     data = [json.loads(part)['data'] for part in data]
 

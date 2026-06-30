@@ -2,8 +2,9 @@ import json
 import os
 
 from collections import defaultdict
-from random import randint
+from random import randint, shuffle
 from time import strftime, gmtime
+from typing import List
 
 
 class Paths:
@@ -26,7 +27,7 @@ class Paths:
 
 class FileUtils:
     @staticmethod
-    def get_files_in_directory(dir_path, is_sorted=True):
+    def get_files_in_directory(dir_path, is_sorted=True) -> List[str]:
         try:
             return_list = list(filter(os.path.isfile, [os.path.join(dir_path, i) for i in os.listdir(dir_path)]))
             if is_sorted:
@@ -35,12 +36,15 @@ class FileUtils:
         except Exception as e:
             print("ERROR: issue in retrieving files within directory " + dir_path)
             print(str(e))
+            assert False
 
     @staticmethod
-    def get_basename(filepath, is_attached=True):
-        if is_attached:
-            return os.path.basename(filepath)
-        return os.path.splitext(os.path.basename(filepath))
+    def get_basename(filepath) -> str:
+        return os.path.basename(filepath).split(".")[0]
+
+    @staticmethod
+    def get_ext(filepath) -> str:
+        return os.path.basename(filepath).split(".")[1]
 
 
 class Stimulus:
@@ -112,90 +116,52 @@ def sample_exp_stimuli(video_filepaths_lists):
     stim_type_to_stim_filepath_dict = defaultdict(list)
 
     for video_filepath in video_filepaths_lists:
-        stim_filename = FileUtils.get_basename(video_filepath, False)[0]
+        stimuli_num = int(FileUtils.get_basename(video_filepath).split("_")[1])
+        stimuli_var = int(FileUtils.get_basename(video_filepath).split("_")[2])
 
-        stimuli_tex = stim_filename.split("_")[1]
-        stimuli_num = int(stim_filename.split("_")[2])
+        if stimuli_num == 0 and stimuli_var == 1:
+            continue
 
-        if stimuli_num == 0:  # practice platforms
-            stim_type_to_stim_filepath_dict["p" + "_" + stimuli_tex].append(video_filepath)
-        elif stimuli_num == 5:  # longest path
-            stim_type_to_stim_filepath_dict["0" + "_" + stimuli_tex].append(video_filepath)
-        elif stimuli_num % 5 == 2 or stimuli_num % 5 == 3 or stimuli_num % 5 == 4:  # similar triplets
-            stim_type_to_stim_filepath_dict[str(stimuli_num // 5 * 2 + 1) + "_" + stimuli_tex].append(video_filepath)
-        elif stimuli_num > 1 and stimuli_num % 5 == 1:  # triplets of the same platform
-            stim_type_to_stim_filepath_dict[str(stimuli_num // 5 * 2) + "_" + stimuli_tex].append(video_filepath)
+        if stimuli_var == 3:
+            continue
+
+        stim_type_to_stim_filepath_dict[stimuli_num].append(video_filepath)
 
     return stim_type_to_stim_filepath_dict
 
 
-def smart_shuffle_stim_type_dict(stim_type_dict):
-    return_stim_type_list = []
+def smart_shuffle(stim_type_dict):
+    new_keys_list = list(stim_type_dict.keys())
+    shuffle(new_keys_list)
 
-    stim_type_list = [stim_type for stim_type in list(stim_type_dict.keys()) if not stim_type.startswith("p")]
-    remaining_list = stim_type_list.copy()
+    return_dict = dict()
+    for key in new_keys_list:
+        return_dict[key] = stim_type_dict[key]
 
-    prev_prev_stim_num = None
-    prev_prev_stim_tex = None
-    prev_stim_num = None
-    prev_stim_tex = None
-
-    tries = 1
-    while len(return_stim_type_list) < len(stim_type_list):
-        sample_stim_type = remaining_list[randint(0, len(remaining_list) - 1)]
-
-        stim_num = sample_stim_type.split("_")[0]
-        stim_tex = sample_stim_type.split("_")[1]
-
-        tries += 1
-        if tries > 10:
-            return smart_shuffle_stim_type_dict(stim_type_dict)
-
-        if prev_stim_num == stim_num and prev_prev_stim_num == stim_num:
-            continue
-
-        if prev_stim_tex == stim_tex and prev_prev_stim_tex == stim_tex:
-            continue
-
-        prev_prev_stim_num = prev_stim_num
-        prev_prev_stim_tex = prev_stim_tex
-        prev_stim_num = stim_num
-        prev_stim_tex = stim_tex
-
-        return_stim_type_list.append(sample_stim_type)
-        remaining_list.remove(sample_stim_type)
-
-        tries = 1
-
-    return return_stim_type_list
+    return return_dict
 
 
 def make_condition_file():
     stim_type_dict = sample_exp_stimuli(FileUtils.get_files_in_directory(Paths.get_stimuli_videos_dir_path()))
 
     practice_list = []
-    stim_num = 1
-    for stim_type, stim_filepath_list in stim_type_dict.items():
-        if stim_type.startswith("p"):
+    for stim_num, stim_filepath_list in stim_type_dict.items():
+        if stim_num == 0:
             for stim_filepath in stim_filepath_list:
                 stimulus = Stimulus(stim_num)
                 stimulus.set_stimulus_video_name(os.path.basename(stim_filepath))
                 practice_list.append(stimulus)
-                stim_num += 1
 
     stimulus_list = []
-    stim_num = 1
-
-    for stim_type in smart_shuffle_stim_type_dict(stim_type_dict):
-        if stim_type.startswith("p"):
+    for stim_num in smart_shuffle(stim_type_dict):
+        if stim_num == 0:
             continue
 
-        stim_filepath = stim_type_dict[stim_type][randint(0, len(stim_type_dict[stim_type]) - 1)]
+        stim_filepath = stim_type_dict[stim_num][randint(0, len(stim_type_dict[stim_num]) - 1)]
 
         stimulus = Stimulus(stim_num)
         stimulus.set_stimulus_video_name(os.path.basename(stim_filepath))
         stimulus_list.append(stimulus)
-        stim_num += 1
 
     JsonWriter.generate_json_condition_file(practice_list, stimulus_list)
 
