@@ -6,10 +6,11 @@ from scipy import stats
 
 from sqlalchemy import create_engine, MetaData, Table, select
 
+EXP_NAME = "exp_main"
 
 DATA_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), "data")
 OUT_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), "out")
-EXP_V1_PATH = os.path.join(DATA_PATH, "exp_v1.db")
+EXP_PATH = os.path.join(DATA_PATH, f"{EXP_NAME}.db")
 
 
 class Quiz:
@@ -28,12 +29,9 @@ class Questionnaire:
 
 
 class Trial:
-    def __init__(self, trial_index, trial_num, trial_type_mat, trial_type_num, slider_value, rt, trial_video_filename):
+    def __init__(self, trial_index, trial_num, slider_value, rt, trial_video_filename):
         self.trial_index = trial_index
         self.trial_num = trial_num
-
-        self.trial_type_mat = trial_type_mat
-        self.trial_type_num = trial_type_num
 
         self.slider_value = slider_value
         self.reaction_time = rt
@@ -45,19 +43,13 @@ class Trial:
         self.z_scored_slider_value = value
 
     def get_trial_name(self):
-        return self.get_trial_type_mat() + "_" + str(self.get_trial_type_num())
+        return str(self.get_trial_num())
 
     def get_trial_num(self):
         return self.trial_num
 
     def get_trial_index(self):
         return self.trial_index
-
-    def get_trial_type_mat(self):
-        return self.trial_type_mat
-
-    def get_trial_type_num(self):
-        return self.trial_type_num
 
     def get_reaction_time(self):
         return self.reaction_time
@@ -214,26 +206,11 @@ class Experiment:
                 subject.add_quiz_data(q)
 
             elif trial_data[self.PHASE] == self.PHASE_TRIAL:
-                t_video_filename = trial_data[self.TRIAL_VIDEO_FILENAME].split("/")[-1]
-
-                t_stim_num = int(t_video_filename.split(".")[0].split("_")[2])
-
-                t_type_mat = t_video_filename.split(".")[0].split("_")[1]
-                t_type_num = 0
-                if t_stim_num == 5:  # longest path
-                    t_type_num = 0
-                elif t_stim_num % 5 == 2 or t_stim_num % 5 == 3 or t_stim_num % 5 == 4:  # similar triplets
-                    t_type_num = t_stim_num // 5 * 2 + 1
-                elif t_stim_num > 1 and t_stim_num % 5 == 1:  # triplets of the same platform
-                    t_type_num = t_stim_num // 5 * 2
-
                 t = Trial(int(trial_data[self.TRIAL_NUMBER]),
-                          t_stim_num,
-                          t_type_mat,
-                          t_type_num,
+                          int(trial_data[self.TRIAL_NAME]),
                           int(trial_data[self.TRIAL_SLIDER_VALUE]),
                           trial_data[self.TRIAL_REACTION_TIME],
-                          t_video_filename)
+                          trial_data[self.TRIAL_VIDEO_FILENAME].split("/")[-1])
                 subject.add_trial_data(t)
 
             elif trial_data[self.PHASE] == self.PHASE_QUESTIONNAIRE:
@@ -270,8 +247,6 @@ class Experiment:
 
                     row_data = [subject_id,
                                 trial_name,
-                                trial_data.get_trial_type_mat(),
-                                trial_data.get_trial_type_num(),
                                 trial_data.get_trial_num(),
                                 trial_data.get_slider_value(),
                                 trial_data.get_z_scored_slider_value(),
@@ -316,5 +291,5 @@ def parse_computational_data():
 
 
 if __name__ == '__main__':
-    experiment_data = parse_db(EXP_V1_PATH)
-    experiment_data.save_experiment_to_csv(os.path.join(OUT_PATH, "exp_v1_out.csv"))
+    experiment_data = parse_db(EXP_PATH)
+    experiment_data.save_experiment_to_csv(os.path.join(OUT_PATH, f"{EXP_NAME}_out.csv"))
